@@ -1,9 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>This is the title of the webpage!</title>
-  </head>
-  <body>
-    <p>Hello from container</p>
-  </body>
+
+<head>
+    <title>Chat</title>
+</head>
+
+<body>
+    <h1>MESSAGES</h1>
+    <ul id="msgList"></ul>
+    <script src="js/fetch_messages.js"></script>
+    <form onsubmit="post(event)" autocomplete="off">
+        <input type="text" id="messageform" name="msg"><br>
+    </form>
+    <script src="js/submit_message.js"></script>
+</body>
+
 </html>
