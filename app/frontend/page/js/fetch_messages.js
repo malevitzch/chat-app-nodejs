@@ -20,4 +20,4 @@ async function setup() {
     }
 }
 
-setInterval(async () => {setup()}, 100);
+setInterval(async () => {setup()}, 500);
