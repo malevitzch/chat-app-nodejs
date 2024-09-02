@@ -1,5 +1,7 @@
 FROM nginx:alpine
-COPY ./page/. /usr/share/nginx/html/
+RUN mkdir /var/www
+COPY ./page/. /var/www
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 
 
