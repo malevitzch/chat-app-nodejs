@@ -27,6 +27,7 @@ function post(event)
     fetch('/api/post/' + inputString)
 	.then(response => response.json());
     console.log('Submitted value:', inputValue);
+    setup();
 }
 
 setInterval(async () => {setup()}, 500);
