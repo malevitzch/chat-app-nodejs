@@ -20,11 +20,11 @@ async function setup() {
     }
 }
 
-function post(event)
+async function post(event)
 {
     const inputString = document.getElementById('messageform').value;
 
-    fetch('/api/post/' + inputString)
+    await fetch('/api/post/' + inputString)
 	.then(response => response.json());
     console.log('Submitted value:', inputValue);
     setup();
