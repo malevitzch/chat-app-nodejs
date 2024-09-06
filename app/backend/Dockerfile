@@ -3,7 +3,7 @@ FROM python:slim-buster
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-RUN apt-get update && apt-get install -y sqlite3
+RUN apt update && apt install -y sqlite3
 
 COPY ./flask/. /var/api/
 
