@@ -9,7 +9,8 @@ for(let i = 0; i < MAX_MESSAGES; i++) {
 
 //initializing the socket
 const hostname = document.location.hostname;
-const socket = io(`http://${hostname}:8000`);
+const address =`http://${hostname}:8000`;
+const socket = io(address);
 
 socket.on('update', (data) => {
     const items = list.getElementsByTagName('li');
