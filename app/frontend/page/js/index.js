@@ -8,7 +8,8 @@ for(let i = 0; i < MAX_MESSAGES; i++) {
 
 
 //initializing the socket
-const socket = io('http://localhost:8000');
+const hostname = document.location.hostname;
+const socket = io(`http://${hostname}:8000`);
 
 socket.on('update', (data) => {
     const items = list.getElementsByTagName('li');
