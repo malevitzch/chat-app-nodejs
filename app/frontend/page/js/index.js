@@ -1,33 +1,27 @@
 const MAX_MESSAGES = 3
 
 list = document.getElementById('msgList');
-
-for(let i = 0; i < MAX_MESSAGES; i++)
-{
+for(let i = 0; i < MAX_MESSAGES; i++) {
     var li = document.createElement('li');
     list.appendChild(li);
 }
 
-async function setup() {
-    let req;
-    await fetch('/api/get')
-	.then(response => response.json())
-	.then(data => req = data);
+
+//initializing the socket
+const socket = io('http://localhost:8000');
+
+socket.on('update', (data) => {
     const items = list.getElementsByTagName('li');
-    for (let i = 0; i < req.length; i++) 
+    for (let i = 0; i < data.length; i++) 
     {
-	items[i].textContent = req[i];
+	items[i].textContent = data[i];
     }
+});
+
+function post() {
+    const msg = document.getElementById('messageform').value;
+    socket.emit('post_msg', msg);
+    console.log("POSTED MSG");
 }
 
-async function post(event)
-{
-    const inputString = document.getElementById('messageform').value;
-
-    await fetch('/api/post/' + inputString)
-	.then(response => response.json());
-    console.log('Submitted value:', inputValue);
-    setup();
-}
-
-setInterval(async () => {setup()}, 500);
+socket.emit('get_msgs');
