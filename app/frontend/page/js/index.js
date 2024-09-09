@@ -16,7 +16,7 @@ socket.on('update', (data) => {
     const items = list.getElementsByTagName('li');
     for (let i = 0; i < data.length; i++) 
     {
-	items[i].textContent = data[i];
+	items[i].textContent = data[i].contents;
     }
 });
 
