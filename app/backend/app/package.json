@@ -1,0 +1,9 @@
+{
+    "name": "backend",
+    "version": "0.0.1",
+    "description": "the backend for chat app",
+    "dependencies": {
+        "socket.io": "latest"
+    },
+    "author": "the flying spaghetti monster"
+}
