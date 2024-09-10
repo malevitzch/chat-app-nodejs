@@ -9,7 +9,6 @@ cd app && docker compose up
 ```
 <h4>Note:</h4> You will need to either be in the docker group on your machine or run docker compose up using sudo. <br/><br/>
 
-# TODO
+# todo:
 - make the frontend less ugly
 - create some sort of authentication
-- fix README
