@@ -1,6 +1,8 @@
 const MAX_MESSAGES = 3
 
-list = document.getElementById('msgList');
+const msg_div = document.getElementById('msgBox');
+const list = msg_div.querySelector('#msgList');
+
 for(let i = 0; i < MAX_MESSAGES; i++) {
     var li = document.createElement('li');
     list.appendChild(li);

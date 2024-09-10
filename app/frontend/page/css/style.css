@@ -18,3 +18,12 @@ body {
   box-shadow: none;
   outline: none;
 }
+
+.msg-container {
+  text-align: center;
+}
+
+.msg-list {
+  list-style-type: none;
+  padding-left: 5px;
+}
