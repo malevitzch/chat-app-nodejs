@@ -7,9 +7,6 @@ To run the project, simply run
 ```bash
 cd app && docker compose up
 ```
-
 # TODO:
-- make a real README, with the necessary dependencies and build steps
-- test if it actually works on a real server
-- use websockets for exchanging information between client and server
+- make the frontend less ugly
 
