@@ -10,5 +10,7 @@ cd app && docker compose up
 <h4>Note:</h4> You will need to either be in the docker group on your machine or run docker compose up using sudo. <br/><br/>
 
 # todo:
-- make the frontend less ugly
+- create a proper box layout, make messages aligned left
+- remove certain annoying margins
+- increase the limit of messages cause 3 is lame
 - create some sort of authentication
