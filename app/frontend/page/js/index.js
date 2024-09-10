@@ -20,6 +20,11 @@ socket.on('update', (data) => {
     }
 });
 
+socket.on('new', (data) => {
+    socket.emit('get_msgs');
+});
+
+
 function post() {
     const msg = document.getElementById('messageform').value;
     socket.emit('post_msg', msg);

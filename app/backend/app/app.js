@@ -25,6 +25,7 @@ io.on('connection', (socket) => {
   const arr = ["TEST", "YES", "NO"]
   socket.on('post_msg', (msg) => {
     db.run(`INSERT INTO messages (contents) VALUES (?);`, [msg]);
+    io.emit('new');
   });
   socket.on('get_msgs', () => {
     db.all(`SELECT contents FROM messages ORDER BY ID ASC`, [], (err, rows) => {
