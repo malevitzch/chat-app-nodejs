@@ -9,4 +9,4 @@ cd app && docker compose up
 ```
 # TODO:
 - make the frontend less ugly
-
+- create some sort of authentication
