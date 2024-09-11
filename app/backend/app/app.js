@@ -11,7 +11,7 @@ function db_init()
           );
     database.run(`CREATE TRIGGER limit_messages AFTER INSERT ON messages
           BEGIN
-            DELETE FROM messages WHERE id NOT IN (SELECT id FROM messages ORDER BY id DESC LIMIT 3);
+            DELETE FROM messages WHERE id NOT IN (SELECT id FROM messages ORDER BY id DESC LIMIT 10);
           END;`
             );
   });

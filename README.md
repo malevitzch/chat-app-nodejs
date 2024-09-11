@@ -14,5 +14,4 @@ cd app && docker compose up
 - remove certain annoying margins (frontend)
 - add error handling (backend and frontend)
 - move database functions to a separate file and only import them (backend)
-- increase the limit of messages cause 3 is lame (backend and frontend)
 - create some sort of authentication

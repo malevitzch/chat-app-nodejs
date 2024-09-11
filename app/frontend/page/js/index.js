@@ -1,4 +1,4 @@
-const MAX_MESSAGES = 3
+const MAX_MESSAGES = 10
 
 const msg_div = document.getElementById('msgBox');
 const list = msg_div.querySelector('#msgList');
