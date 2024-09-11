@@ -14,4 +14,5 @@ cd app && docker compose up
 - remove certain annoying margins (frontend)
 - add error handling (backend and frontend)
 - move database functions to a separate file and only import them (backend)
-- create some sort of authentication
+- require an username to post, user signs their messages with a hash generated from the username
+- make a cool way to represent the hash
