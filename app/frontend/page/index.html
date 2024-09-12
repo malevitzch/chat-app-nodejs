@@ -8,12 +8,15 @@
 </head>
 
 <body>
-    <h1 style="text-align: center;">MESSAGES</h1>
-    <div class="msg-container" id="msgBox">
-        <ul class="msg-list" id="msgList"></ul>
-        <form class="msg-form" onsubmit="post(event)" autocomplete="off">
-            <input type="text" id="messageform" name="msg"><br>
-        </form>
+    <div id="main-container">
+        <div id="sidebar-container"></div>
+        <div class="msg-container" id="msgBox">
+            <h1 style="margin: 10px">MESSAGES</h1>
+            <ul class="msg-list" id="msgList"></ul>
+            <form class="msg-form" onsubmit="post(event)" autocomplete="off">
+                <input type="text" id="messageform" name="msg"><br>
+            </form>
+        </div>
     </div>
     <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
     <script src="js/index.js"></script>
