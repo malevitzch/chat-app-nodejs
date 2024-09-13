@@ -1,3 +1,9 @@
+:root {
+  --bg-color: #1a1b26;
+  --bg-lighter: #292e42;
+  --txt-color: #7aa2f7;
+}
+
 html,
 body {
   margin: 0;
@@ -15,12 +21,12 @@ body {
   box-sizing: border-box;
   width: 30%;
   height: 100vh;
-  border: 2px solid #7aa2f7;
+  border: 2px solid var(--txt-color);
 }
 
 body {
-  background-color: #1a1b26;
-  color: #7aa2f7;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
 }
 
 .msg-form {
@@ -28,8 +34,8 @@ body {
 }
 
 .msg-form input[type="text"] {
-  color: #7aa2f7;
-  background-color: #292e42;
+  color: var(--txt-color);
+  background-color: var(--bg-lighter);
   border: none;
 }
 
@@ -45,7 +51,7 @@ body {
   float: right;
   width: 70%;
   min-height: 100vh;
-  border: 2px solid #7aa2f7;
+  border: 2px solid var(--txt-color);
   box-sizing: border-box;
 }
 
