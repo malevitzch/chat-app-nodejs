@@ -13,6 +13,9 @@ cd app && docker compose up
 - create a proper box layout, make messages aligned left (frontend)
 - remove certain annoying margins (frontend)
 - add error handling (backend and frontend)
+- use react (frontend)
+- split css into files (frontend)
+- add a way to actually change colorschemes (frontend)
 - move database functions to a separate file and only import them (backend)
 - require an username to post, user signs their messages with a hash generated from the username
 - make a cool way to represent the hash
