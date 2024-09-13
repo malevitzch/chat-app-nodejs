@@ -1,8 +1,5 @@
-:root {
-  --bg-color: #1a1b26;
-  --bg-lighter: #292e42;
-  --txt-color: #7aa2f7;
-}
+@import url("global_vars.css");
+@import url("switch.css");
 
 html,
 body {

@@ -8,6 +8,15 @@ for(let i = 0; i < MAX_MESSAGES; i++) {
     list.appendChild(li);
 }
 
+document.getElementById("cont").addEventListener("click", function() {
+    document.getElementById("tog").classList.toggle("active");
+    if(document.getElementById("tog").classList.contains("active")) {
+	set_color_scheme(colorscheme_orange);
+    } else {
+	set_color_scheme(colorscheme_default);
+    }
+});
+
 
 //initializing the socket
 const hostname = document.location.hostname;
