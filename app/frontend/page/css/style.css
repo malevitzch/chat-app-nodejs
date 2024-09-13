@@ -23,6 +23,7 @@ body {
 
 body {
   background-color: var(--bg-color);
+  transition: all 0.2s linear;
   color: var(--txt-color);
 }
 

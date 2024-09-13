@@ -12,7 +12,6 @@ let colorscheme_orange = {
 
 function set_color_scheme(colorscheme)
 {
-    console.log("TEST");
     document.documentElement.style.setProperty('--bg-color', colorscheme.background);
     document.documentElement.style.setProperty('--bg-lighter', colorscheme.light_background);
     document.documentElement.style.setProperty('--txt-color', colorscheme.text);
