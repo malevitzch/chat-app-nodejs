@@ -1,5 +1,5 @@
 # chat-app
-A docker web chatroom application ready to be built into an image and ran on any linux machine
+A docker web chatroom application ready to be built using dockerk compose and ran on any linux machine
 
 # usage
 It is required to have a relatively new version of docker installed (one that supports docker compose)\
@@ -13,8 +13,6 @@ cd app && docker compose up
 - create a proper box layout, make messages aligned left (frontend)
 - remove certain annoying margins (frontend)
 - add error handling (backend and frontend)
-- split css into files (frontend)
-- add a way to actually change colorschemes (frontend)
 - move database functions to a separate file and only import them (backend)
 - require an username to post, user signs their messages with a hash generated from the username
 - make a cool way to represent the hash
