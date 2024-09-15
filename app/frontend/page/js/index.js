@@ -8,6 +8,10 @@ for(let i = 0; i < MAX_MESSAGES; i++) {
     list.appendChild(li);
 }
 
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+});
+
 document.getElementById("cont").addEventListener("click", function() {
     document.getElementById("tog").classList.toggle("active");
     if(document.getElementById("tog").classList.contains("active")) {
@@ -39,7 +43,7 @@ socket.on('new', (data) => {
 function post() {
     const msg = document.getElementById('messageform').value;
     socket.emit('post_msg', msg);
-    console.log("POSTED MSG");
+    document.getElementById("msgform").reset();    
 }
 
 socket.emit('get_msgs');
