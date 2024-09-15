@@ -5,9 +5,9 @@ let colorscheme_default = {
 };
 
 let colorscheme_orange = {
-    background: "#693f00",
-    light_background: "#8c5501",
-    text: "#fcba03",
+    background: "#5c3602",
+    light_background: "#8d4f02",
+    text: "#ff8d00",
 };
 
 function set_color_scheme(colorscheme)
