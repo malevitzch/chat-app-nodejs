@@ -1,5 +1,5 @@
 # chat-app
-A docker web chatroom application ready to be built using dockerk compose and ran on any linux machine
+A docker web chatroom application ready to be built using docker compose and ran on any linux machine
 
 # usage
 It is required to have a relatively new version of docker installed (one that supports docker compose)\
