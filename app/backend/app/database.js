@@ -3,8 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 
 //API function for initializing the database
-function init()
-{
+function init() {
   //creating a new database in-memory
   const database = new sqlite3.Database(':memory:');
 
