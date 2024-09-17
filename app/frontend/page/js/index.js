@@ -1,13 +1,17 @@
 const MAX_MESSAGES = 10
 
 //generating the list of messages
-const msg_div = document.getElementById('msgBox');
-const list = msg_div.querySelector('#msgList');
+let msg_div;
+let list;
 
-for(let i = 0; i < MAX_MESSAGES; i++) {
-    var li = document.createElement('li');
-    list.appendChild(li);
-}
+window.addEventListener('load', function() {
+    msg_div = document.getElementById('msgBox');
+    list = msg_div.querySelector('#msgList');
+    for(let i = 0; i < MAX_MESSAGES; i++) {
+	var li = document.createElement('li');
+	list.appendChild(li);
+    }
+});
 
 //preventing default form behavior, basically forms used to reload the page and reset colorscheme on submit
 document.querySelector('form').addEventListener('submit', function(event) {
