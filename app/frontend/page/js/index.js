@@ -34,6 +34,9 @@ window.addEventListener('load', function() {
 function post() {
     //get the message value from the form
     const msg = document.getElementById('messageform').value;
+    if(msg.trim() == '') {
+	return;
+    };
     //reset the form (we have to do this manually since default behavior is disabled)
     document.getElementById("msgform").reset();
     //send the message to the backend
