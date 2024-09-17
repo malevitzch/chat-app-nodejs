@@ -12,8 +12,10 @@ cd app && docker compose up
 # todo:
 - create a proper box layout, make messages aligned left (frontend)
 - remove certain annoying margins (frontend)
+- add a favicon (frontend)
 - add verification for empty messages (backend)
 - add error handling (backend and frontend)
 - move database functions to a separate file and only import them (backend)
+- implement login.html (frontend)
 - require an username to post, user signs their messages with a hash generated from the username
 - make a cool way to represent the hash
