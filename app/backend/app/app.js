@@ -23,6 +23,9 @@ io.on('connection', (socket) => {
   
   //whenever a post_msg message is emitted, we put it into the database
   socket.on('post_msg', (msg) => {
+    if(msg.trim() == '') {
+      return;
+    }
     db.post(database, msg);
     //inform all the currently connected users that a new message is available
     io.emit('new');
