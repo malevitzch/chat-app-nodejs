@@ -25,9 +25,9 @@ document.getElementById("cont").addEventListener("click", function() {
 });
 
 //give focus to the text field on page load
-window.onload = function() {
+window.addEventListener('load', function() {
     document.getElementById("messageform").focus();
-};
+});
 
 //initializing the socket
 const hostname = document.location.hostname;
