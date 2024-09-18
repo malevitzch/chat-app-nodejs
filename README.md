@@ -7,9 +7,8 @@ To run the project, simply run
 ```shell
 cd app && docker compose up
 ```
-#### Note:
-You will need to either be in the docker group on your machine or run docker compose up using sudo.
-The docker group is usually automatically created on docker installation, to become a part of the docker group run\
+Note:\
+You will need to either be in the docker group on your machine or run docker compose up using sudo. The docker group is usually automatically created on docker installation, to become a part of the docker group run.
 
 ```shell
 sudo usermod -aG docker $USER
