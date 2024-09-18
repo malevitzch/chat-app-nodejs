@@ -4,13 +4,13 @@ A docker web chatroom application ready to be built using docker compose and ran
 # usage
 It is required to have a relatively new version of docker installed (one that supports docker compose)\
 To run the project, simply run 
-```console
+```shell
 cd app && docker compose up
 ```
 #### Note:
 You will need to either be in the docker group on your machine or run docker compose up using sudo.
 The docker group is usually automatically created on docker installation, to become a part of the docker group run   
-```console
+```shell
 sudo usermod -aG docker $USER
 ```
 This will add the current user to the docker group.  
