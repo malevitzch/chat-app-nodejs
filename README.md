@@ -7,7 +7,14 @@ To run the project, simply run
 ```bash
 cd app && docker compose up
 ```
-<h4>Note:</h4> You will need to either be in the docker group on your machine or run docker compose up using sudo. <br/><br/>
+<h4>Note:</h4> You will need to either be in the docker group on your machine or run docker compose up using sudo.
+The docker group is usually automatically created on docker installation, to become a part of the docker group run: 
+```bash
+sudo usermod -aG docker $USER
+```
+This will add the current user to the docker group.
+
+<br/><br/>
 
 # todo:
 - create a proper box layout, make messages aligned left (frontend)
