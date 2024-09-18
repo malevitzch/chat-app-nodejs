@@ -13,9 +13,7 @@ The docker group is usually automatically created on docker installation, to bec
 ```bash
 sudo usermod -aG docker $USER
 ```
-This will add the current user to the docker group.
-
-<br/><br/>
+This will add the current user to the docker group.  
 
 # todo:
 - create a proper box layout, make messages aligned left (frontend)
