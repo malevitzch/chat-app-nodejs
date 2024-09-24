@@ -16,12 +16,11 @@ sudo usermod -aG docker $USER
 This will add the current user to the docker group.  
 
 # todo:
-- modify the UI so that messages are displayed in a box
+- modify the UI so that messages are displayed in a nicer way
 - remove certain annoying margins (frontend)
-- add a favicon (frontend)
-- add verification for empty messages (backend)
+- make favicon change color with theme (frontend)
 - add error handling (backend and frontend)
-- move database functions to a separate file and only import them (backend)
 - implement login.html (frontend)
+- fix the damn site on mobile (frontend)
 - require an username to post, user signs their messages with a hash generated from the username
 - make a cool way to represent the hash
