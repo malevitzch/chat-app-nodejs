@@ -1,9 +1,9 @@
 const MAX_MESSAGES = 10
 
+import colors from "./colorschemes.js";
+
 let msg_div;
 let list;
-
-//TODO: use require with colorscheme
 
 window.addEventListener('load', function() {
     //generating the list of messages
@@ -25,10 +25,10 @@ window.addEventListener('load', function() {
     document.getElementById("cont").addEventListener("click", function() {
 	document.getElementById("tog").classList.toggle("active");
 	if(document.getElementById("tog").classList.contains("active")) {
-	    set_color_scheme(colorscheme_orange);
+	    colors.set_colorscheme(colors.colorscheme_orange);
 	} else {
-	    set_color_scheme(colorscheme_default);
-	}
+	    colors.set_colorscheme(colors.colorscheme_default);
+	    }
     });
 });
 
