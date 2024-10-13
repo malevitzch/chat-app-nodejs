@@ -15,11 +15,14 @@ sudo usermod -aG docker $USER
 ```
 This will add the current user to the docker group.  
 
-# todo:
-- modify the UI so that messages are displayed in a nicer way
+# todo-upgrades:
+- make the max messages variable be controlled by a global var in docker itself, running sed to replace placeholders
+- add error handling (backend and frontend)
 - remove certain annoying margins (frontend)
 - make favicon change color with theme (frontend)
-- add error handling (backend and frontend)
+
+# todo-features
+- modify the UI so that messages are displayed in a nicer way
 - implement login.html (frontend)
 - fix the damn site on mobile (frontend)
 - require an username to post, user signs their messages with a hash generated from the username
