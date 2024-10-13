@@ -1,7 +1,6 @@
 //importing sqlite3 library, verbose is for better diagnostics
 const sqlite3 = require('sqlite3').verbose();
 
-
 //API function for initializing the database
 function init() {
   //creating a new database in-memory
