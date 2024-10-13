@@ -64,7 +64,10 @@ window.addEventListener('load', function() {
     //filling the list with recieved data upon recieving an 'update' message through the socket
     socket.on('update', (data) => {
 	//access the list of items from the list
-	//TODO: error handling in case the database somehow returns more than MAX_MESSAGES 
+	if(data.length > MAX_MESSAGES) {
+	    var diff = data.length - MAX_MESSAGES;
+	    data = data.slice(diff, data.length); //we want to keep the latest messages
+	}
 	const items = list.getElementsByTagName('li');
 	for (let i = 0; i < data.length; i++) 
 	{
