@@ -43,6 +43,8 @@ function post() {
     //send the message to the backend
     socket.emit('post_msg', msg);
 }
+//attach post function to window so that submitting works
+window.post = post;
 
 //give focus to the text field on page load
 window.addEventListener('load', function() {
