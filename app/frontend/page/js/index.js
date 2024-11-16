@@ -60,7 +60,7 @@ let socket;
 window.addEventListener('load', function() {
     //initializing the socket
     hostname = document.location.hostname;
-    address =`http://${hostname}:8000`;
+    address =`http://${hostname}`;
     socket = io(address);
 
     //filling the list with recieved data upon recieving an 'update' message through the socket
