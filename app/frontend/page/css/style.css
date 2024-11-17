@@ -46,6 +46,7 @@ body {
 }
 
 .msg-container {
+  word-wrap: break-word;
   text-align: left;
   padding: 20px;
   float: right;
