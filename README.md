@@ -16,6 +16,7 @@ sudo usermod -aG docker $USER
 This will add the current user to the docker group.  
 
 # todo-upgrades:
+- fix the page being scrollable for some reason
 - make the max messages variable be controlled by a global var in docker itself, running sed to replace placeholders
 - add error handling (backend and frontend)
 - remove certain annoying margins (frontend)
