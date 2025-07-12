@@ -1,3 +1,5 @@
+const MESSAGE_LIMIT = 4;//process.env.MESSAGE_LIMIT || 10;
+
 //importing sqlite3 library, verbose is for better diagnostics
 const sqlite3 = require('sqlite3').verbose();
 
@@ -13,10 +15,10 @@ function init() {
           (id INTEGER PRIMARY KEY AUTOINCREMENT, contents TEXT NOT NULL);`
           );
     //adding a trigger that removes all messages beyond a certain limit on insert
-    //TODO: make this a parametrized query for X where X is max messages
     database.run(`CREATE TRIGGER limit_messages AFTER INSERT ON messages
           BEGIN
-            DELETE FROM messages WHERE id NOT IN (SELECT id FROM messages ORDER BY id DESC LIMIT 10);
+            DELETE FROM messages WHERE id NOT IN
+            (SELECT id FROM messages ORDER BY id DESC LIMIT ${MESSAGE_LIMIT});
           END;`
             );
   });

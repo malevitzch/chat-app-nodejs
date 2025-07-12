@@ -1,4 +1,4 @@
-const MAX_MESSAGES = 10
+const MESSAGE_LIMIT = 10;
 
 import colors from "./colorschemes.js";
 
@@ -10,7 +10,7 @@ window.addEventListener('load', function() {
     //TODO: make messages processed differently than through an ul because this does not seem to be the optimal way to do things
     msg_div = document.getElementById('msgBox');
     list = msg_div.querySelector('#msgList');
-    for(let i = 0; i < MAX_MESSAGES; i++) {
+    for(let i = 0; i < MESSAGE_LIMIT; i++) {
 	var li = document.createElement('li');
 	list.appendChild(li);
     }
@@ -66,8 +66,8 @@ window.addEventListener('load', function() {
     //filling the list with recieved data upon recieving an 'update' message through the socket
     socket.on('update', (data) => {
 	//access the list of items from the list
-	if(data.length > MAX_MESSAGES) {
-	    var diff = data.length - MAX_MESSAGES;
+	if(data.length > MESSAGE_LIMIT) {
+	    var diff = data.length - MESSAGE_LIMIT;
 	    data = data.slice(diff, data.length); //we want to keep the latest messages
 	}
 	const items = list.getElementsByTagName('li');

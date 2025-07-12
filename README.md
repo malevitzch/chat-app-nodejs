@@ -13,11 +13,11 @@ You will need to either be in the docker group on your machine or run docker com
 ```shell
 sudo usermod -aG docker $USER
 ```
-This will add the current user to the docker group.  
+This will add the current user to the docker group.
 
 # todo-upgrades:
 - fix the page being scrollable for some reason
-- make the max messages variable be controlled by a global var in docker itself, running sed to replace placeholders
+- make the message limit for the page modifiable
 - add error handling (backend and frontend)
 - remove certain annoying margins (frontend)
 - make favicon change color with theme (frontend)
