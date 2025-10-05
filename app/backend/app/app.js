@@ -13,6 +13,10 @@ app.get('/config/', (req, res) => {
   });
 });
 
+app.listen(8000, () => {
+  console.log('Server listening on port 8000');
+});
+
 //importing sqlite3, verbose means extra diagnostics
 const sqlite3 = require('sqlite3').verbose();
 
