@@ -1,6 +1,18 @@
 //importing socketio
 const { Server } = require('socket.io');
 
+//the whole point of this section is just to give a http server to frontend
+const express = require('express');
+const app = express();
+
+//config endpoint
+app.get('/config/', (req, res) => {
+  res.json({
+    MESSAGE_LIMIT: parseInt(process.env.MESSAGE_LIMIT) || 3,
+    MAX_MESSAGE_LENGTH: parseInt(process.env.MAX_MESSAGE_LENGTH) || 500
+  });
+});
+
 //importing sqlite3, verbose means extra diagnostics
 const sqlite3 = require('sqlite3').verbose();
 
