@@ -20,7 +20,7 @@ const io = new Server(8000, {
 io.on('connection', (socket) => {
   //on every connection we output that there is a successful connection (this is mostly for debugging purposes)
   console.log("SUCCESSFUL CONNECTION");
-  
+
   //whenever a post_msg message is emitted, we put it into the database
   socket.on('post_msg', (msg) => {
     if(msg.trim() == '') {

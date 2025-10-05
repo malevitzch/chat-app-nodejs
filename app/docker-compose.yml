@@ -3,10 +3,12 @@ services:
     ports:
       - "80:80"
     build: ./frontend
+    env_file: .env
     networks:
       - main_network
   backend:
     build: ./backend
+    env_file: .env
     networks:
      - main_network
 networks:

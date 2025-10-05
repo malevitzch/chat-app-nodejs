@@ -1,4 +1,4 @@
-const MESSAGE_LIMIT = 4;//process.env.MESSAGE_LIMIT || 10;
+const MESSAGE_LIMIT = process.env.MESSAGE_LIMIT || 10;
 
 //importing sqlite3 library, verbose is for better diagnostics
 const sqlite3 = require('sqlite3').verbose();
