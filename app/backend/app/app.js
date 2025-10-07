@@ -8,12 +8,11 @@ const app = express();
 //config endpoint
 app.get('/config/', (req, res) => {
   res.json({
-    MESSAGE_LIMIT: parseInt(process.env.MESSAGE_LIMIT) || 3,
-    MAX_MESSAGE_LENGTH: parseInt(process.env.MAX_MESSAGE_LENGTH) || 500
+    MESSAGE_LIMIT: parseInt(process.env.MESSAGE_LIMIT) || 4
   });
 });
 
-app.listen(8000, () => {
+app.listen(8080, () => {
   console.log('Server listening on port 8000');
 });
 
