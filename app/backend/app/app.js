@@ -1,3 +1,6 @@
+const CONFIG_PORT = 8080
+const BACKEND_SOCKET_PORT = 8000
+
 //importing socketio
 const { Server } = require('socket.io');
 
@@ -12,8 +15,8 @@ app.get('/config/', (req, res) => {
   });
 });
 
-app.listen(8080, () => {
-  console.log('Server listening on port 8000');
+app.listen(CONFIG_PORT, () => {
+  console.log(`Backend config server listening on port ${CONFIG_PORT}`);
 });
 
 //importing sqlite3, verbose means extra diagnostics
@@ -26,7 +29,7 @@ const db = require('./database.js');
 const database = db.init();
 
 //initializing a socketio server to handle websocket connections
-const io = new Server(8000, {
+const io = new Server(BACKEND_SOCKET_PORT, {
   cors: {
     origin: "*",
   }

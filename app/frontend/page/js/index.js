@@ -6,7 +6,6 @@ let msg_div;
 let list;
 
 window.addEventListener('load', function() {
-    await config_promise;
     //generating the list of messages
     //TODO: make messages processed differently than through an ul because this does not seem to be the optimal way to do things
     msg_div = document.getElementById('msgBox');
