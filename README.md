@@ -16,6 +16,9 @@ sudo usermod -aG docker $USER
 This will add the current user to the docker group.
 
 # todo-upgrades:
+- fix the issue with the database not behaving properly when trying to implement a higher limit before cleanup
+- debug endpoint for backend to allow testing the database and other backend stuff
+- make the message removal use latest ID to remove rather than a potentially costly select statement
 - fix the page being scrollable for some reason
 - make the message limit for the page modifiable
 - add error handling (backend and frontend)

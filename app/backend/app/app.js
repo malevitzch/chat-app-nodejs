@@ -35,7 +35,7 @@ const io = new Server(BACKEND_SOCKET_PORT, {
   }
 });
 
-io.on('connection', (socket) => {
+io.on('connection', (socket) => { 
   //on every connection we output that there is a successful connection (this is mostly for debugging purposes)
   console.log("SUCCESSFUL CONNECTION");
 
