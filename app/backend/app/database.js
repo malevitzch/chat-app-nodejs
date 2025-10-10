@@ -1,6 +1,6 @@
 // Handles how much hisotry is kept
 const MESSAGE_LIMIT = process.env.MESSAGE_LIMIT || 10;
-
+let last_index = 0;
 // Handles how many extra messages can be stored into the database before we
 // perform a clean. Allows to trade disk space for speed
 const EXTRA_BEFORE_DELETION = process.env.EXTRA_BEFORE_DELETION || 0;
@@ -17,7 +17,7 @@ function init() {
   database.serialize(() => {
     // creating the table
     database.run(`CREATE TABLE IF NOT EXISTS messages 
-          (id INTEGER PRIMARY KEY AUTOINCREMENT, contents TEXT NOT NULL, sender TEXT);`
+          (id INTEGER PRIMARY KEY, contents TEXT NOT NULL, sender TEXT);`
           );
     // adding a trigger that removes all messages beyond a certain limit on insert
     let LIMIT = parseInt(MESSAGE_LIMIT, 10) + parseInt(EXTRA_BEFORE_DELETION, 10);
@@ -50,10 +50,13 @@ async function get(database) {
 
 // API function that inserts a new message into the database
 function post(database, msg, sender=null) {
+  last_index += 1;
   if(sender==null) {
-    database.run(`INSERT INTO messages (contents) VALUES (?);`, [msg]);
+    database.run(`INSERT INTO messages (ID, contents) VALUES (?, ?);`, 
+      [last_index, msg]);
   } else {
-    database.run(`INSERT INTO messages (contents, sender) VALUES (?, ?);`, [msg, sender]);
+    database.run(`INSERT INTO messages (ID, contents, sender) VALUES (?, ?, ?);`,
+      [last_index, msg, sender]);
   }
 }
 
