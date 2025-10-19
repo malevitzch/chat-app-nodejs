@@ -2,7 +2,7 @@
 const MESSAGE_LIMIT = parseInt(process.env.MESSAGE_LIMIT || 10);
 
 // Handles how much hisotry is kept server-side
-const HISTORY_SIZE = Math.max(MESSAGE_LIMIT, parseInt(process.env.HISTORY_LIMIT || 10));
+const HISTORY_SIZE = Math.max(MESSAGE_LIMIT, parseInt(process.env.HISTORY_SIZE || 10));
 
 let last_index = 0;
 // Handles how many extra messages can be stored into the database before we
