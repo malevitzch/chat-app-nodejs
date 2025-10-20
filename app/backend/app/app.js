@@ -1,5 +1,5 @@
-const CONFIG_PORT = 8080
-const BACKEND_SOCKET_PORT = 8000
+const CONFIG_PORT = parseInt(process.env.CONFIG_PORT) || 8080;
+const BACKEND_SOCKET_PORT = parseInt(process.env.BACKEND_SOCKET_PORT) || 8000;
 
 //importing socketio
 const { Server } = require('socket.io');
@@ -35,13 +35,13 @@ const io = new Server(BACKEND_SOCKET_PORT, {
   }
 });
 
-io.on('connection', (socket) => { 
+io.on('connection', (socket) => {
   //on every connection we output that there is a successful connection (this is mostly for debugging purposes)
   console.log("SUCCESSFUL CONNECTION");
 
   //whenever a post_msg message is emitted, we put it into the database
   socket.on('post_msg', (msg) => {
-    if(msg.trim() == '') {
+    if (msg.trim() == '') {
       return;
     }
     db.post(database, msg);
