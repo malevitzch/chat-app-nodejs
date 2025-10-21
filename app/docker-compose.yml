@@ -7,7 +7,7 @@ services:
     networks:
       - main_network
   backend:
-    build: ./backend
+    build: ./backend-rust
     env_file: .env
     networks:
      - main_network
