@@ -7,6 +7,8 @@ services:
     networks:
       - main_network
   backend:
+    ports:
+      - "8000:8000"
     build: ./backend-rust
     env_file: .env
     networks:
