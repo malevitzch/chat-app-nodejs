@@ -1,12 +1,11 @@
+mod db;
+mod msg;
 use std::net::SocketAddr;
 
 use axum::{routing::get, Router};
-async fn hello() -> &'static str {
-    "Welcome"
-}
 
 fn create_router() -> Router {
-    Router::new().route("/", get(hello))
+    Router::new().route("/", get(db::hello))
 }
 
 async fn run_server() {
