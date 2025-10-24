@@ -12,7 +12,17 @@ services:
     build: ./backend-rust
     env_file: .env
     networks:
-     - main_network
+      - main_network
+  db:
+    image: postgres:16-alpine
+    environment:
+      # The defaults should be changed
+      # when deploying the application
+      - POSTGRES_USER=backend
+      - POSTGRES_PASSWORD=passwd
+      - POSTGRES_DB=messagedb
+    networks:
+      - main_network
 networks:
   main_network:
     driver: bridge
