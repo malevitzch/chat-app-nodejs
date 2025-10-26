@@ -1,13 +1,25 @@
 use crate::db::MessageDB;
-use sqlx::postgres::PgPoolOptions;
+use sqlx::postgres::{PgPool, PgPoolOptions};
 
-struct PostgresMessageDB {
-    // TODO: consider using something more complex like url::Url
-    url: String,
+pub struct PostgresMessageDB {
+    // TODO: consider using something more complex like url::Url\
+    pool: PgPool,
+}
+
+impl PostgresMessageDB {
+    pub async fn new(url: &str) -> Self {
+        // FIXME: error handling
+        let pool = PgPoolOptions::new()
+            .max_connections(5)
+            .connect(url)
+            .await
+            .unwrap();
+        Self { pool }
+    }
 }
 
 impl MessageDB for PostgresMessageDB {
-    fn init(&self) {
+    async fn init(&self) {
         sqlx::query(
             r#"
             CREATE TABLE IF NOT EXISTS messages (
@@ -15,14 +27,22 @@ impl MessageDB for PostgresMessageDB {
                 content TEXT NOT NULL
             );
             "#,
-        );
+        )
+        .execute(&self.pool)
+        .await;
     }
+    async fn add_message(&self, data: serde_json::Value) {}
 
     async fn get_message_count(&self) -> usize {
-        let res = sqlx::query(
+        let (count,): (i64,) = sqlx::query_as(
             r#"
             SELECT COUNT(*) FROM messages;
             "#,
-        );
+        )
+        .fetch_one(&self.pool)
+        .await
+        .unwrap();
+
+        count as usize
     }
 }

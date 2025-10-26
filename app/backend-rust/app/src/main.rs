@@ -1,7 +1,9 @@
 mod db;
 mod dbimpl;
 mod msg;
-use std::net::SocketAddr;
+use dbimpl::postgres::PostgresMessageDB;
+use std::{env, net::SocketAddr};
+use tokio::runtime::Runtime;
 
 use axum::{routing::get, Router};
 
@@ -17,15 +19,10 @@ async fn run_server() {
         .unwrap();
 }
 
-fn main() {
-    println!("Hello, world!");
-    let rt = tokio::runtime::Builder::new_multi_thread()
-        .worker_threads(4)
-        .enable_all()
-        .build()
-        .unwrap();
-
-    rt.block_on(async {
-        run_server().await;
-    });
+#[tokio::main]
+async fn main() {
+    let url = env::var("DATABASE_URL").unwrap();
+    let pgdb = PostgresMessageDB::new(&url).await;
+    println!("Connected to database");
+    run_server().await;
 }

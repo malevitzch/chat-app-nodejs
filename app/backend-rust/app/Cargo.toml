@@ -14,3 +14,5 @@ openssl = { version = "0.10", features = ["vendored"] }
 [features]
 
 postgres = []
+
+default = ["postgres"]
