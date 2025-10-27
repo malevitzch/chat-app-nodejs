@@ -19,7 +19,7 @@ impl MessageDB for PostgresMessageDB {
         let res = sqlx::query(
             r#"
             CREATE TABLE IF NOT EXISTS messages (
-                id PRIMARY KEY,
+                id SERIAL PRIMARY KEY,
                 content TEXT NOT NULL
             );
             "#,
@@ -29,6 +29,16 @@ impl MessageDB for PostgresMessageDB {
         Ok(())
     }
     async fn add_message(&self, data: serde_json::Value) -> Result<(), sqlx::Error> {
+        //TODO: handle error
+        let text = data.get("text").unwrap();
+        sqlx::query(
+            r#"
+            INSERT INTO messages (content) values ($1);
+            "#,
+        )
+        .bind(text)
+        .execute(&self.pool)
+        .await?;
         Ok(())
     }
 
