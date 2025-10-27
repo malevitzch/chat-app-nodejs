@@ -2,8 +2,7 @@ FROM rust:1.90-bullseye AS builder
 
 WORKDIR /usr/src/app
 
-COPY app/src ./src
-COPY app/Cargo.toml .
+COPY app/ ./
 
 RUN apt-get update && apt-get install -y \
   libssl-dev \

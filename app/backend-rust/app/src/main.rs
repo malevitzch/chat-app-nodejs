@@ -22,7 +22,7 @@ async fn run_server() {
 #[tokio::main]
 async fn main() {
     let url = env::var("DATABASE_URL").unwrap();
-    let pgdb = PostgresMessageDB::new(&url).await;
+    let pgdb = PostgresMessageDB::new(&url).await.unwrap();
     println!("Connected to database");
     run_server().await;
 }

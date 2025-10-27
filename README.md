@@ -16,9 +16,11 @@ sudo usermod -aG docker $USER
 This will add the current user to the docker group.
 
 # todo-upgrades:
+- rust dependency caching
+- errors should not rely on sqlx::Error to be more general
+- a script which allows for easy up/down/build
 - fix the issue with the database not behaving properly when trying to implement a higher limit before cleanup
 - debug endpoint for backend to allow testing the database and other backend stuff
-- make the message removal use latest ID to remove rather than a potentially costly select statement
 - fix the page being scrollable for some reason
 - make the message limit for the page modifiable
 - add error handling (backend and frontend)
@@ -28,6 +30,6 @@ This will add the current user to the docker group.
 # todo-features
 - modify the UI so that messages are displayed in a nicer way
 - implement login.html (frontend)
-- fix the damn site on mobile (frontend)
+- fix the site on mobile (frontend)
 - require an username to post, user signs their messages with a hash generated from the username
 - make a cool way to represent the hash

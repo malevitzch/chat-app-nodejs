@@ -1,5 +1,6 @@
 use crate::db::MessageDB;
 use sqlx::postgres::{PgPool, PgPoolOptions};
+use sqlx::Error;
 
 pub struct PostgresMessageDB {
     // TODO: consider using something more complex like url::Url\
@@ -7,20 +8,15 @@ pub struct PostgresMessageDB {
 }
 
 impl PostgresMessageDB {
-    pub async fn new(url: &str) -> Self {
-        // FIXME: error handling
-        let pool = PgPoolOptions::new()
-            .max_connections(5)
-            .connect(url)
-            .await
-            .unwrap();
-        Self { pool }
+    pub async fn new(url: &str) -> Result<Self, sqlx::Error> {
+        let pool = PgPoolOptions::new().max_connections(5).connect(url).await?;
+        Ok(Self { pool })
     }
 }
 
 impl MessageDB for PostgresMessageDB {
-    async fn init(&self) {
-        sqlx::query(
+    async fn init(&self) -> Result<(), sqlx::Error> {
+        let res = sqlx::query(
             r#"
             CREATE TABLE IF NOT EXISTS messages (
                 id PRIMARY KEY,
@@ -29,20 +25,22 @@ impl MessageDB for PostgresMessageDB {
             "#,
         )
         .execute(&self.pool)
-        .await;
+        .await?;
+        Ok(())
     }
-    async fn add_message(&self, data: serde_json::Value) {}
+    async fn add_message(&self, data: serde_json::Value) -> Result<(), sqlx::Error> {
+        Ok(())
+    }
 
-    async fn get_message_count(&self) -> usize {
+    async fn get_message_count(&self) -> Result<usize, sqlx::Error> {
         let (count,): (i64,) = sqlx::query_as(
             r#"
             SELECT COUNT(*) FROM messages;
             "#,
         )
         .fetch_one(&self.pool)
-        .await
-        .unwrap();
+        .await?;
 
-        count as usize
+        Ok(count as usize)
     }
 }
