@@ -3,14 +3,16 @@ services:
     ports:
       - "80:80"
     build: ./frontend
-    env_file: .env
+    # The env_file default is just an example, use your own
+    env_file: example.env
     networks:
       - main_network
   backend:
     ports:
       - "8000:8000"
     build: ./backend-rust
-    env_file: .env
+    # The env_file default is just an example, use your own
+    env_file: example.env
     networks:
       - main_network
   db:
