@@ -1,8 +1,11 @@
+use crate::dbimpl::postgres::PostgresMessageDB;
+use std::{env, net::SocketAddr};
+
 async fn run_server() {
-    let url = env::var("DATABASE_URL").unwrap();
+    let url = env::var("DB_URL").unwrap();
 
-    let dbtype = env::var("DATABASE_TYPE").unwrap();
-    let db;
-
+    // TODO: actually use the db_type to instantiate the database
+    // as a dyn object
+    let dbtype = env::var("DB_TYPE").unwrap();
     let db = PostgresMessageDB::new(&url).await.unwrap();
 }

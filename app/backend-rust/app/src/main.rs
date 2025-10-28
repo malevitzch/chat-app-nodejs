@@ -1,11 +1,11 @@
 mod db;
 mod dbimpl;
 mod msg;
+mod server;
 
 use dbimpl::postgres::PostgresMessageDB;
 use serde_json::json;
 use std::{env, net::SocketAddr};
-use tokio::runtime::Runtime;
 
 use db::MessageDB;
 
@@ -25,7 +25,7 @@ async fn run_server() {
 
 #[tokio::main]
 async fn main() {
-    let url = env::var("DATABASE_URL").unwrap();
+    let url = env::var("DB_URL").unwrap();
     let pgdb = PostgresMessageDB::new(&url).await.unwrap();
     println!("Connected to database");
     pgdb.init().await.unwrap();
