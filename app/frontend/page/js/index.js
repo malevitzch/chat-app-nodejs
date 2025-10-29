@@ -2,27 +2,22 @@ let MESSAGE_LIMIT = 10;
 
 import colors from "./colorschemes.js";
 
-//declaration of global variables
-let hostname;
-let address;
-let socket;
-
 let msg_div;
 let list;
 
 window.addEventListener('load', function() {
-    //generating the list of messages
-    //TODO: make messages processed differently than through an ul because this does not seem to be the optimal way to do things
-    msg_div = document.getElementById('msgBox');
-    list = msg_div.querySelector('#msgList');
-    for(let i = 0; i < MESSAGE_LIMIT; i++) {
-  var li = document.createElement('li');
-  list.appendChild(li);
-    }
-    //preventing default form behavior, basically forms used to reload the page and reset colorscheme on submit
-    document.querySelector('form').addEventListener('submit', function(event) {
+  //generating the list of messages
+  //TODO: make messages processed differently than through an ul because this does not seem to be the optimal way to do things
+  msg_div = document.getElementById('msgBox');
+  list = msg_div.querySelector('#msgList');
+  for(let i = 0; i < MESSAGE_LIMIT; i++) {
+    var li = document.createElement('li');
+    list.appendChild(li);
+  }
+  //preventing default form behavior, basically forms used to reload the page and reset colorscheme on submit
+  document.querySelector('form').addEventListener('submit', function(event) {
   event.preventDefault();
-    });
+  });
 });
 
 window.addEventListener('load', function() {
@@ -30,7 +25,7 @@ window.addEventListener('load', function() {
   document.getElementById("cont").addEventListener("click", function() {
     document.getElementById("tog").classList.toggle("active");
     if(document.getElementById("tog").classList.contains("active")) {
-      colors.set_colorscheme(colors.colorscheme_orange);
+        colors.set_colorscheme(colors.colorscheme_orange);
     } else {
       colors.set_colorscheme(colors.colorscheme_default);
     }
@@ -38,13 +33,13 @@ window.addEventListener('load', function() {
 });
 
 function post() {
-    //get the message value from the form
-    const msg = document.getElementById('messageform').value;
-    if(msg.trim() == '') return;
-    //reset the form (we have to do this manually since default behavior is disabled)
-    document.getElementById("msgform").reset();
-    //send the message to the backend
-    socket.send(JSON.stringify({ type: 'post_msg', data: msg }));
+  //get the message value from the form
+  const msg = document.getElementById('messageform').value;
+  if(msg.trim() == '') return;
+  //reset the form (we have to do this manually since default behavior is disabled)
+  document.getElementById("msgform").reset();
+  //send the message to the backend
+  socket.emit('post_msg', msg);
 }
 //attach post function to window so that submitting works
 window.post = post;
@@ -54,34 +49,38 @@ window.addEventListener('load', function() {
     document.getElementById("messageform").focus();
 });
 
+//declaration of global variables
+let hostname;
+let address;
+let socket;
 
 //handle websocket stuff
 window.addEventListener('load', function() {
+  //initializing the socket
   hostname = document.location.hostname;
-  socket = new WebSocket(`ws://${hostname}/ws`);
+  address =`http://${hostname}`;
+  socket = io(address);
 
-  socket.onopen = () => {
-    socket.send(JSON.stringify({ type: 'get_msgs' }));
-  };
-
-  socket.onmessage = (event) => {
-    const message = JSON.parse(event.data);
-    if(message.type === 'update') {
-
-      const data = message.data;
-      if(data.length > MESSAGE_LIMIT) {
-          var diff = data.length - MESSAGE_LIMIT;
-          data = data.slice(diff, data.length); //we want to keep the latest messages
-      }
-      const items = list.getElementsByTagName('li');
-      for(let i = 0; i < data.length; i++) {
-          items[i].textContent = data[i].contents;
-      }
-
+  //filling the list with recieved data upon recieving an 'update' message through the socket
+  socket.on('update', (data) => {
+    //access the list of items from the list
+    if(data.length > MESSAGE_LIMIT) {
+        var diff = data.length - MESSAGE_LIMIT;
+        data = data.slice(diff, data.length); //we want to keep the latest messages
     }
-    if(message.type === 'new') {
-        socket.send(JSON.stringify({ type: 'get_msgs' }));
+    const items = list.getElementsByTagName('li');
+    for(let i = 0; i < data.length; i++) {
+        items[i].textContent = data[i].contents;
     }
-  };
+  });
+
+  //whenever the server has new data, it sends a 'new' message to the client
+  socket.on('new', () => {
+    //the client emits the get_msgs message upon recieving the information that there is new data
+    socket.emit('get_msgs');
+  });
+
+  //initial emisson of get_msgs so that we get them on page load
+  socket.emit('get_msgs');
 });
 
