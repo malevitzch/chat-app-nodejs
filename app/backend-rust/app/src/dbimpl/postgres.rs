@@ -2,8 +2,6 @@ use crate::db::MessageDB;
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::Error;
 
-use serde::{Deserialize, Serialize};
-
 pub struct PostgresMessageDB {
     // TODO: consider using something more complex like url::Url\
     pool: PgPool,
@@ -16,14 +14,9 @@ impl PostgresMessageDB {
     }
 }
 
-#[derive(sqlx::FromRow, Serialize, Deserialize)]
-struct RowMSG {
-    content: String,
-}
-
 impl MessageDB for PostgresMessageDB {
     async fn init(&self) -> Result<(), sqlx::Error> {
-        let res = sqlx::query(
+        sqlx::query(
             r#"
             CREATE TABLE IF NOT EXISTS messages (
                 id SERIAL PRIMARY KEY,
@@ -37,16 +30,17 @@ impl MessageDB for PostgresMessageDB {
     }
     async fn fetch_messages(&self) -> Result<serde_json::Value, sqlx::Error> {
         // TODO: bind the actual message limit rather than a static 10
-        let result = sqlx::query_as::<_, RowMSG>(
+        let result: serde_json::Value = sqlx::query_scalar(
             r#"
-            SELECT content FROM messages ORDER BY id LIMIT $1
+            SELECT json_agg(json_build_object('content', content::json))
+            FROM (SELECT content FROM messages ORDER BY id LIMIT $1) msg;
             "#,
         )
         .bind(10)
-        .fetch_all(&self.pool)
+        .fetch_one(&self.pool)
         .await?;
 
-        Ok(serde_json::to_value(result).unwrap())
+        Ok(result)
     }
     async fn add_message(&self, data: serde_json::Value) -> Result<(), sqlx::Error> {
         //TODO: handle error
