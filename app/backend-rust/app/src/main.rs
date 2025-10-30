@@ -32,5 +32,6 @@ async fn main() {
     println!("{}", pgdb.get_message_count().await.unwrap());
     pgdb.add_message(json!({"text": "HEY"})).await.unwrap();
     println!("{}", pgdb.get_message_count().await.unwrap());
+    println!("{}", pgdb.fetch_messages().await.unwrap());
     run_server().await;
 }
