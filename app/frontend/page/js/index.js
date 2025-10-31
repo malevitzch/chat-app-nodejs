@@ -70,7 +70,7 @@ window.addEventListener('load', function() {
     }
     const items = list.getElementsByTagName('li');
     for(let i = 0; i < data.length; i++) {
-        items[i].textContent = data[i].contents;
+        items[i].textContent = data[i].content;
     }
   });
 

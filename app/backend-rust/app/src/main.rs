@@ -11,18 +11,6 @@ use db::MessageDB;
 
 use axum::{routing::get, Router};
 
-fn create_router() -> Router {
-    Router::new().route("/", get(db::hello))
-}
-
-async fn run_server() {
-    let app = create_router();
-    let address = SocketAddr::from(([0, 0, 0, 0], 8000));
-    axum::serve(tokio::net::TcpListener::bind(address).await.unwrap(), app)
-        .await
-        .unwrap();
-}
-
 #[tokio::main]
 async fn main() {
     let url = env::var("DB_URL").unwrap();
@@ -33,5 +21,5 @@ async fn main() {
     pgdb.add_message(json!({"text": "HEY"})).await.unwrap();
     println!("{}", pgdb.get_message_count().await.unwrap());
     println!("{}", pgdb.fetch_messages().await.unwrap());
-    run_server().await;
+    server::run_server().await;
 }
