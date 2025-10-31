@@ -1,6 +1,7 @@
-#[derive(Debug)]
+use serde::{Deserialize, Serialize};
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Message {
-    pub text: String,
+    pub content: String,
 }
 
 #[macro_export]

@@ -33,7 +33,7 @@ impl MessageDB for PostgresMessageDB {
         let result: serde_json::Value = sqlx::query_scalar(
             r#"
             SELECT json_agg(json_build_object('content', content::json))
-            FROM (SELECT content FROM messages ORDER BY id LIMIT $1) msg;
+            FROM (SELECT content FROM (SELECT content, id FROM messages ORDER BY id desc LIMIT $1) ORDER BY id asc) msg;
             "#,
         )
         .bind(10)
@@ -44,7 +44,7 @@ impl MessageDB for PostgresMessageDB {
     }
     async fn add_message(&self, data: serde_json::Value) -> Result<(), sqlx::Error> {
         //TODO: handle error
-        let text = data.get("text").unwrap();
+        let text = data.get("content").unwrap();
         sqlx::query(
             r#"
             INSERT INTO messages (content) values ($1);

@@ -1,12 +1,11 @@
-use crate::db::MessageDB;
 use crate::dbimpl::postgres::PostgresMessageDB;
+use crate::{db::MessageDB, msg::Message};
 use axum::routing::get;
-use serde_json::Value;
 use std::env;
 
 use std::sync::Arc;
 
-use socketioxide::{extract::SocketRef, SocketIo};
+use socketioxide::{extract::Data, extract::SocketRef, SocketIo};
 
 pub async fn run_server() {
     let url = env::var("DB_URL").unwrap();
@@ -16,14 +15,27 @@ pub async fn run_server() {
     // to make sure handling multiple connections is possible
     let dbtype = env::var("DB_TYPE").unwrap();
     let db = Arc::new(PostgresMessageDB::new(&url).await.unwrap());
+    let dbc = db.clone();
     db.init().await.unwrap();
 
     let (layer, io) = SocketIo::new_layer();
     io.ns("/", async move |s: SocketRef| {
-        let db = db.clone();
-        s.on("get_msgs", async move |s: SocketRef| {
-            let msgs = db.fetch_messages().await.unwrap();
-            s.emit("update", &msgs).unwrap();
+        let db = dbc.clone();
+        s.on("get_msgs", {
+            let db = db.clone();
+            async move |s: SocketRef| {
+                let msgs = db.fetch_messages().await.unwrap();
+                s.emit("update", &msgs).unwrap();
+            }
+        });
+        s.on("post_msg", {
+            let db = db.clone();
+            async move |s: SocketRef, Data(data): Data<serde_json::Value>| {
+                db.add_message(data).await.unwrap();
+                let msgs = db.fetch_messages().await.unwrap();
+                s.broadcast().emit("update", &msgs).await.ok();
+                s.emit("update", &msgs).unwrap();
+            }
         });
     });
     let app = axum::Router::new()

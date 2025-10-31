@@ -38,8 +38,12 @@ function post() {
   if(msg.trim() == '') return;
   //reset the form (we have to do this manually since default behavior is disabled)
   document.getElementById("msgform").reset();
+
+  //construct the json structure
+  let msg_json = {content: msg};
   //send the message to the backend
-  socket.emit('post_msg', msg);
+  socket.emit('post_msg', msg_json);
+  console.log(msg_json);
 }
 //attach post function to window so that submitting works
 window.post = post;
