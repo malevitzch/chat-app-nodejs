@@ -3,14 +3,28 @@ services:
     ports:
       - "80:80"
     build: ./frontend
-    env_file: .env
+    # The env_file default is just an example, use your own
+    env_file: example.env
     networks:
       - main_network
   backend:
-    build: ./backend
-    env_file: .env
+    ports:
+      - "8000:8000"
+    build: ./backend-rust
+    # The env_file default is just an example, use your own
+    env_file: example.env
     networks:
-     - main_network
+      - main_network
+  db:
+    image: postgres:16-alpine
+    environment:
+      # The defaults should be changed
+      # when deploying the application
+      - POSTGRES_USER=backend
+      - POSTGRES_PASSWORD=passwd
+      - POSTGRES_DB=messagedb
+    networks:
+      - main_network
 networks:
   main_network:
     driver: bridge
