@@ -15,7 +15,14 @@ sudo usermod -aG docker $USER
 ```
 This will add the current user to the docker group.
 
+# configuration
+The application currently uses the rust backend rather than nodejs. The database is Postgres but it will be expanded to include other options in the future.
+When deploying the application, it's very important to change the .env file in docker compose for security purposes.
+
 # todo-upgrades:
+- a build script written in python to allow for better experience and backend switching
+- use dynamic objects for messageDB
+- enforce the usage of environment variables for config in PostgresMessageDB
 - rust dependency caching
 - errors should not rely on sqlx::Error to be more general
 - a script which allows for easy up/down/build
