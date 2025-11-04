@@ -1,16 +1,19 @@
 use crate::db::MessageDB;
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::Error;
+use std::env;
 
 pub struct PostgresMessageDB {
     // TODO: consider using something more complex like url::Url\
     pool: PgPool,
+    msg_limit: usize,
 }
 
 impl PostgresMessageDB {
     pub async fn new(url: &str) -> Result<Self, sqlx::Error> {
         let pool = PgPoolOptions::new().max_connections(5).connect(url).await?;
-        Ok(Self { pool })
+        let msg_limit = env::var("MESSAGE_LIMIT").unwrap().parse::<usize>().unwrap();
+        Ok(Self { pool, msg_limit })
     }
 }
 
@@ -36,7 +39,7 @@ impl MessageDB for PostgresMessageDB {
             FROM (SELECT content FROM (SELECT content, id FROM messages ORDER BY id desc LIMIT $1) ORDER BY id asc) msg;
             "#,
         )
-        .bind(10)
+        .bind(self.msg_limit as i64)
         .fetch_one(&self.pool)
         .await?;
 
